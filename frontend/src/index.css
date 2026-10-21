@@ -1,0 +1,16 @@
+@import "tailwindcss";
+
+@theme {
+  --color-accent: #0061fe;
+  --color-accent-hover: #0050d4;
+  --color-surface: #ffffff;
+  --color-muted: #f7f5f2;
+  --color-line: #e6e3de;
+  --color-ink: #1e1919;
+  --color-ink-soft: #637282;
+  --font-sans: "Inter", system-ui, sans-serif;
+}
+
+body {
+  @apply bg-surface text-ink font-sans antialiased;
+}

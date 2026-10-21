@@ -1,0 +1,12 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/Informator.Domain/Informator.Domain.csproj" />
+    <Project Path="src/Informator.Application/Informator.Application.csproj" />
+    <Project Path="src/Informator.Infrastructure/Informator.Infrastructure.csproj" />
+    <Project Path="src/Informator.Api/Informator.Api.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/Informator.Application.Tests/Informator.Application.Tests.csproj" />
+    <Project Path="tests/Informator.Api.IntegrationTests/Informator.Api.IntegrationTests.csproj" />
+  </Folder>
+</Solution>
