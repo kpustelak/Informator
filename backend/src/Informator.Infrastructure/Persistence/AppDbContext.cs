@@ -7,9 +7,9 @@ public class AppDbContext(DbContextOptions<AppDbContext> options) : DbContext(op
 {
     public DbSet<ContentEntry> ContentEntries => Set<ContentEntry>();
 
-    protected override void OnModelCreating(ModelBuilder b)
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        b.Entity<ContentEntry>(e =>
+        modelBuilder.Entity<ContentEntry>(e =>
         {
             e.HasIndex(x => new { x.WorkspaceId, x.Key }).IsUnique();
             e.Property(x => x.Key).HasMaxLength(200);

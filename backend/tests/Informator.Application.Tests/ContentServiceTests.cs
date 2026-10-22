@@ -1,5 +1,6 @@
 using Informator.Application.Content;
 using Informator.Domain.Entities;
+using Xunit;
 
 namespace Informator.Application.Tests;
 
@@ -17,7 +18,7 @@ public class ContentServiceTests
     }
 
     [Fact]
-    public async Task Create_ReturnsEntryWithVersion1()
+    public async Task CreateReturnsEntryWithVersion1()
     {
         var service = new ContentService(new FakeRepo());
         var result = await service.CreateAsync(Guid.NewGuid(), new("home.title", ContentType.Text, "\"Hi\""), default);
