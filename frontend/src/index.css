@@ -3,6 +3,8 @@
 @theme {
   --color-accent: #0061fe;
   --color-accent-hover: #0050d4;
+  --color-danger: #d92d20;
+  --color-danger-hover: #b42318;
   --color-surface: #ffffff;
   --color-muted: #f7f5f2;
   --color-line: #e6e3de;
