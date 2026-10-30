@@ -8,9 +8,10 @@ export function AppLayout() {
         <nav className="space-y-1 text-sm">
           <Link to="/" className="block rounded px-3 py-2 hover:bg-line">Treści</Link>
           <Link to="/login" className="block rounded px-3 py-2 hover:bg-line">Konto</Link>
+          <Link to="/playground" className="block rounded px-3 py-2 hover:bg-line">Playground</Link>
         </nav>
       </header>
-      <main><Outlet /></main>
+      <main className="px-8"><Outlet /></main>
     </div>
   )
 }
