@@ -2,7 +2,7 @@
 
 
 const BASE_CLASSES =
-    "inline-flex cursor-pointer items-center justify-center rounded-xl border px-4 py-2 text-base font-medium tracking-normal transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+    "inline-flex cursor-pointer items-center justify-center rounded-xl border px-4 py-2 text-sm font-medium tracking-normal transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
 
 const VARIANT_CLASSES = {
     primary: "border-accent bg-accent text-muted hover:border-accent-hover hover:bg-accent-hover",

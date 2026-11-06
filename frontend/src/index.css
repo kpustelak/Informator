@@ -47,27 +47,17 @@
     font-size: 2rem;
     line-height: 0.99;
 
-    @variant md {
-      font-size: 3rem;
-    }
   }
 
   h2 {
     font-size: 1.6rem;
     line-height: 1;
 
-    @variant md {
-      font-size: 3rem;
-    }
   }
 
   h3 {
     font-size: 1.3rem;
 
-    @variant md {
-      font-size: 2rem;
-      line-height: 1;
-    }
   }
 
   h4,
