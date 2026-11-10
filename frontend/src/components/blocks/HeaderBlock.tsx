@@ -3,7 +3,7 @@ import {type ReactNode} from "react";
 interface HeaderBlockProps {
     title: string,
     description: string,
-    children: ReactNode
+    children?: ReactNode
 }
 
 export function HeaderBlock({ title, description, children }: HeaderBlockProps) {
@@ -13,11 +13,13 @@ export function HeaderBlock({ title, description, children }: HeaderBlockProps) 
                 <h2>{title}</h2>
                 <p className="text-ink-soft">{description}</p>
             </div>
-            <div className="flex align-center items-center">
-                <div className="h-fit">
-                    {children}
+            {children && (
+                <div className="flex align-center items-center">
+                    <div className="h-fit">
+                        {children}
+                    </div>
                 </div>
-            </div>
+            )}
         </div>
     )
 }

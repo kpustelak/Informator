@@ -1,5 +1,4 @@
 import { GoGlobe, GoHome, GoPerson, GoWorkflow } from "react-icons/go"
-import {PageList} from "@/features/PageList/PageList.tsx";
 
 export const navTitle = { text: "Informator", href: "/", icon: GoHome }
 

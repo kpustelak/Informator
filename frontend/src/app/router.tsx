@@ -2,6 +2,7 @@ import { createRootRoute, createRoute, createRouter, lazyRouteComponent } from '
 import { LoginPage } from '@/features/auth/LoginPage'
 import { AppLayout } from './AppLayout'
 import { PageList} from "@/features/PageList/PageList"
+import { Page } from "@/features/Page/Page"
 
 const rootRoute = createRootRoute({ component: AppLayout })
 
@@ -11,7 +12,13 @@ const indexRoute = createRoute({
     component: () => <PageList/>,
 })
 
-const loginRoute = createRoute({ getParentRoute: () => rootRoute, path: '/login', component: LoginPage })
+const pageRoute = createRoute({
+    getParentRoute: () => rootRoute,
+    path: '/pages/$pageId',
+    component: Page,
+})
+
+const loginRoute =createRoute({ getParentRoute: () => rootRoute, path: '/login', component: LoginPage })
 
 const devRoutes = import.meta.env.DEV
   ? [
@@ -23,7 +30,7 @@ const devRoutes = import.meta.env.DEV
     ]
   : []
 
-export const router = createRouter({ routeTree: rootRoute.addChildren([indexRoute, loginRoute, ...devRoutes]) })
+export const router = createRouter({ routeTree: rootRoute.addChildren([indexRoute, pageRoute, loginRoute, ...devRoutes]) })
 
 declare module '@tanstack/react-router' {
   interface Register {
