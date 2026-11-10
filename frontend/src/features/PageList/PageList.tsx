@@ -6,6 +6,7 @@ import {ContentTable, type Column} from "@/components/blocks/ContentTable.tsx";
 import {mockColumns, mockRows, type MockRow} from "@/features/PageList/mockTable.ts";
 import {VisitsChart} from "@/components/charts/VisitsChart.tsx";
 import {mockVisits} from "@/features/PageList/mockVisits.ts";
+import {SidePanel} from "@/components/blocks/SidePanel"
 
 const columns: Column<MockRow>[] = mockColumns.map(column =>
     column.id === "first"
@@ -27,6 +28,7 @@ const columns: Column<MockRow>[] = mockColumns.map(column =>
 export function PageList() {
     return (
         <div>
+            <SidePanel />
             <HeaderBlock title={"Lorem ipsum"} description={"Lorem ipsum dolor sit amet consectetur adipiscing elit. Quisque faucibus ex sapien vitae pellentesque sem placerat. "} >
                 <Button type={"a"} variant={"secondary"}> Add page </Button>
             </HeaderBlock>
