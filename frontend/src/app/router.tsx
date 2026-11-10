@@ -1,14 +1,16 @@
 import { createRootRoute, createRoute, createRouter, lazyRouteComponent } from '@tanstack/react-router'
 import { LoginPage } from '@/features/auth/LoginPage'
-import { ContentList } from '@/features/content/ContentList'
 import { AppLayout } from './AppLayout'
+import { PageList} from "@/features/PageList/PageList"
 
 const rootRoute = createRootRoute({ component: AppLayout })
+
 const indexRoute = createRoute({
-  getParentRoute: () => rootRoute,
-  path: '/',
-  component: () => <ContentList workspaceId="demo" />,
+    getParentRoute: () => rootRoute,
+    path: '/pagelist',
+    component: () => <PageList/>,
 })
+
 const loginRoute = createRoute({ getParentRoute: () => rootRoute, path: '/login', component: LoginPage })
 
 const devRoutes = import.meta.env.DEV
