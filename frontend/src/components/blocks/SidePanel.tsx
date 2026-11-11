@@ -12,8 +12,8 @@ interface SidePanelProps {
 export function SidePanel({ title, children, isOpen, onClose }: SidePanelProps) {
 
     return createPortal(
-        <div className={`fixed inset-0 z-20 flex justify-end bg-black/20 ${isOpen ? "" : "hidden"}`}>
-            <div className="flex h-full w-full max-w-200 flex-col bg-surface">
+        <div className={`fixed inset-0 z-20 flex justify-end bg-black/20 transition-all  ${isOpen ? "visible opacity-100" : "invisible opacity-0"}`}>
+            <div className={`flex h-full w-full max-w-200 flex-col bg-surface  bg-surface transition-transform duration-300 ease-out ${isOpen ? "translate-x-0" : "translate-x-full"}`} >
                 <header className="border-b border-line px-6 py-4">
                     <h3>{title}</h3>
                 </header>
