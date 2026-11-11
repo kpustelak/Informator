@@ -1,16 +1,78 @@
 @import "tailwindcss";
+@import "@fontsource-variable/inter";
+@import "@fontsource-variable/jetbrains-mono";
 
 @theme {
-  --color-accent: #0061fe;
-  --color-accent-hover: #0050d4;
-  --color-surface: #ffffff;
-  --color-muted: #f7f5f2;
-  --color-line: #e6e3de;
-  --color-ink: #1e1919;
-  --color-ink-soft: #637282;
-  --font-sans: "Inter", system-ui, sans-serif;
+  --color-accent: #2dd4bf;
+  --color-accent-hover: #5eead4;
+  --color-on-accent: #111214;
+  --color-warning: #ff7a6b;
+  --color-warning-hover: #ff9a8f;
+  --color-surface: #17181c;
+  --color-muted: #101114;
+  --color-line: #e4e5ea20;
+  --color-ink: #ececee;
+  --color-ink-soft: #a1a3ab;
+
+  --font-sans: "Inter Variable", system-ui, sans-serif;
+  --font-mono: "JetBrains Mono Variable", ui-monospace, monospace;
+
+  --tracking-body: -0.0025em;
+  --tracking-heading: -0.025em;
+  --tracking-eyebrow: 0.05em;
 }
 
-body {
-  @apply bg-surface text-ink font-sans antialiased;
+@layer base {
+  html {
+    color-scheme: dark;
+  }
+
+  body {
+    @apply bg-surface text-ink font-sans antialiased;
+    letter-spacing: var(--tracking-body);
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply font-medium;
+    letter-spacing: var(--tracking-heading);
+    line-height: 1.2;
+  }
+
+  h1 {
+    font-size: 2rem;
+    line-height: 0.99;
+
+  }
+
+  h2 {
+    font-size: 1.6rem;
+    line-height: 1;
+
+  }
+
+  h3 {
+    font-size: 1.3rem;
+
+  }
+
+  h4,
+  h5,
+  h6 {
+    font-size: 1.125rem;
+  }
+
+  p {
+    line-height: 1.2;
+  }
+}
+
+@utility eyebrow {
+  @apply text-xs font-semibold uppercase;
+  letter-spacing: var(--tracking-eyebrow);
+  line-height: 1;
 }
