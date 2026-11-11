@@ -7,6 +7,9 @@ import {mockColumns, mockRows, type MockRow} from "@/features/PageList/mockTable
 import {VisitsChart} from "@/components/charts/VisitsChart.tsx";
 import {mockVisits} from "@/features/PageList/mockVisits.ts";
 import {SidePanel} from "@/components/blocks/SidePanel"
+import {useState} from "react";
+
+const INPUT_CLASSES = "w-full rounded-xl border border-line bg-transparent px-4 py-2 text-sm text-ink placeholder:text-ink-soft focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
 
 const columns: Column<MockRow>[] = mockColumns.map(column =>
     column.id === "first"
@@ -26,11 +29,36 @@ const columns: Column<MockRow>[] = mockColumns.map(column =>
 )
 
 export function PageList() {
+    const [isPanelOpen, setIsPanelOpen] = useState<boolean>(false)
+
+    function onSidePanelOpen() { setIsPanelOpen(true) }
+    function onSidePanelClose() { setIsPanelOpen(false) }
+
     return (
         <div>
-            <SidePanel />
+            <SidePanel title="New page" isOpen={isPanelOpen} onClose={onSidePanelClose}>
+                <label className="flex flex-col gap-2">
+                    <span className="text-sm font-medium">Name</span>
+                    <input placeholder="e.g. Personal blog" className={INPUT_CLASSES} />
+                </label>
+                <label className="flex flex-col gap-2">
+                    <span className="text-sm font-medium">API key</span>
+                    <input placeholder="personal-blog" className={`${INPUT_CLASSES} font-mono`} />
+                </label>
+                <label className="flex flex-col gap-2">
+                    <span className="text-sm font-medium">Description</span>
+                    <textarea rows={4} placeholder="Short page description" className={`${INPUT_CLASSES} resize-none`} />
+                </label>
+                <label className="flex flex-col gap-2">
+                    <span className="text-sm font-medium">Page type</span>
+                    <select className={INPUT_CLASSES}>
+                        <option>Blog</option>
+                        <option>Portfolio</option>
+                    </select>
+                </label>
+            </SidePanel>
             <HeaderBlock title={"Lorem ipsum"} description={"Lorem ipsum dolor sit amet consectetur adipiscing elit. Quisque faucibus ex sapien vitae pellentesque sem placerat. "} >
-                <Button type={"a"} variant={"secondary"}> Add page </Button>
+                <Button type={"button"} variant={"secondary"} onClick={onSidePanelOpen}> Add page </Button>
             </HeaderBlock>
             <div className="flex px-6 py-6">
                 <div className="w-2/3 flex flex-col gap-y-4">
