@@ -2,7 +2,7 @@ import {HeaderBlock} from "@/components/blocks/HeaderBlock.tsx";
 import {SearchInput} from "@/components/ui/SearchInput.tsx";
 import {Button} from "@/components/ui/Button.tsx";
 import {ContentTable} from "@/components/blocks/ContentTable.tsx";
-import {mockColumns, mockRows} from "@/features/PageList/mockTable.ts";
+import {mockColumns, mockRows} from "@/lib/interfaces/PageList.ts";
 
 export function Page(){
     return (

@@ -3,6 +3,8 @@ import { LoginPage } from '@/features/auth/LoginPage'
 import { AppLayout } from './AppLayout'
 import { PageList} from "@/features/PageList/PageList"
 import { Page } from "@/features/Page/Page"
+import {PageSections} from "@/features/PageSections/PageSections";
+import {PlaygroundPage} from "@/features/playground/PlaygroundPage.tsx";
 
 const rootRoute = createRootRoute({ component: AppLayout })
 
@@ -18,6 +20,12 @@ const pageRoute = createRoute({
     component: Page,
 })
 
+const pageSectionsRoute = createRoute({
+    getParentRoute: () => rootRoute,
+    path: '/sections',
+    component: () => <PageSections />,
+})
+
 const loginRoute =createRoute({ getParentRoute: () => rootRoute, path: '/login', component: LoginPage })
 
 const devRoutes = import.meta.env.DEV
@@ -30,7 +38,7 @@ const devRoutes = import.meta.env.DEV
     ]
   : []
 
-export const router = createRouter({ routeTree: rootRoute.addChildren([indexRoute, pageRoute, loginRoute, ...devRoutes]) })
+export const router = createRouter({ routeTree: rootRoute.addChildren([indexRoute, pageRoute, loginRoute, pageSectionsRoute , ...devRoutes]) })
 
 declare module '@tanstack/react-router' {
   interface Register {

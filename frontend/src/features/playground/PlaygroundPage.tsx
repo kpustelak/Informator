@@ -1,14 +1,10 @@
-import {HeaderBlock} from "@/components/blocks/HeaderBlock.tsx";
-import {HeaderFields} from "./blockFields/HeaderFields.tsx";
-import {TextFields} from "./blockFields/TextFields.tsx";
-import {ImageFields} from "./blockFields/ImageFields.tsx";
-import {GalleryFields} from "./blockFields/GalleryFields.tsx";
-import {LinkFields} from "./blockFields/LinkFields.tsx";
-import type {GalleryData, HeaderData, ImageData, LinkData, TextData} from "./blockFields/types.ts";
-import {INPUT_CLASSES} from "./inputClasses.ts";
+import { MdOutlineTitle } from "react-icons/md";
+import { GalleryFields, HeaderFields, ImageFields, LinkFields, TextFields } from "@/features/PageSections/blockFields";
+import { INPUT_CLASSES} from "@/components/ui/inputClasses.ts";
 import { PiCirclesThreePlusFill } from "react-icons/pi";
-import {SidePanel} from "@/components/blocks/SidePanel.tsx";
-import {useState} from "react";
+import { useState} from "react";
+import type { GalleryData, HeaderData, LinkData, TextData, ImageData } from "@/lib/interfaces/PageSections.ts";
+import { HeaderBlock, LabelWithInput, SectionBlock, SidePanel} from "@/components/blocks";
 
 const BLOCK_TYPES = [
     { id: "header", label: "Header" },
@@ -36,25 +32,95 @@ const EMPTY_BLOCK_DATA: BlockDataMap = {
     link: { label: "", url: "" },
 }
 
+interface Section {
+    id: number,
+    title: string,
+    apiName: string,
+    type: BlockType,
+    data: BlockDataMap,
+}
+
+const MOCK_SECTIONS: Section[] = [
+    {
+        id: 1,
+        title: "About me",
+        apiName: "about-me-header",
+        type: "header",
+        data: {...EMPTY_BLOCK_DATA, header: { title: "Hi, I'm Kornel", description: "Developer and builder" }},
+    },
+    {
+        id: 2,
+        title: "Bio",
+        apiName: "bio-text",
+        type: "text",
+        data: {...EMPTY_BLOCK_DATA, text: { content: "Lorem ipsum dolor sit amet consectetur adipiscing elit." }},
+    },
+    {
+        id: 3,
+        title: "Avatar",
+        apiName: "avatar-image",
+        type: "image",
+        data: {...EMPTY_BLOCK_DATA, image: { src: "https://picsum.photos/400", alt: "Avatar" }},
+    },
+    {
+        id: 4,
+        title: "GitHub",
+        apiName: "github-link",
+        type: "link",
+        data: {...EMPTY_BLOCK_DATA, link: { label: "My GitHub", url: "https://github.com" }},
+    },
+]
+
 export function PlaygroundPage() {
     const [isPanelOpen, setIsPanelOpen] = useState(false)
     const [newBlockType, setNewBlockType] = useState<BlockType>("text")
     const [blockData, setBlockData] = useState<BlockDataMap>(EMPTY_BLOCK_DATA)
 
-    function onSidePanelOpen() { setIsPanelOpen(true) }
+    const [sections, setSections] = useState<Section[]>(MOCK_SECTIONS)
+    const [editingId, setEditingId] = useState<number | null>(null)
+    const [title, setTitle] = useState("")
+    const [apiName, setApiName] = useState("")
+
     function onSidePanelClose() { setIsPanelOpen(false) }
+
+    function openNew() {
+        setEditingId(null)
+        setTitle("")
+        setApiName("")
+        setNewBlockType("text")
+        setBlockData(EMPTY_BLOCK_DATA)
+        setIsPanelOpen(true)
+    }
+    function openEdit(section: Section) {
+        setEditingId(section.id)
+        setTitle(section.title)
+        setApiName(section.apiName)
+        setNewBlockType(section.type)
+        setBlockData(section.data)
+        setIsPanelOpen(true)
+    }
+
+    function onSave() {
+        const section = { id: editingId ?? Date.now(), title, apiName, type: newBlockType, data: blockData }
+        setSections((prev) =>
+            editingId === null
+                ? [...prev, section]
+                : prev.map((s) => (s.id === editingId ? section : s))
+        )
+        setIsPanelOpen(false)
+    }
 
     return (
         <div className="h-full">
-            <SidePanel title="New section" isOpen={isPanelOpen} onClose={onSidePanelClose}>
-                <label className="flex flex-col gap-2">
-                    <span className="text-sm font-medium">Section title</span>
-                    <input placeholder="e.g. About me" className={INPUT_CLASSES} />
-                </label>
-                <label className="flex flex-col gap-2">
-                    <span className="text-sm font-medium">Section API Name</span>
-                    <input placeholder="e.g. about-me-header" className={INPUT_CLASSES} />
-                </label>
+            <SidePanel
+                title={editingId === null ? "New section" : "Edit section"}
+                submitLabel={editingId === null ? "Create" : "Save"}
+                isOpen={isPanelOpen}
+                onClose={onSidePanelClose}
+                onSubmit={onSave}
+            >
+                <LabelWithInput label="Section title" inputPlaceholder="e.g. About me" classNameInput={INPUT_CLASSES} value={title} onChange={setTitle} />
+                <LabelWithInput label="Section API Name" inputPlaceholder="e.g. about-me-header" classNameInput={INPUT_CLASSES} value={apiName} onChange={setApiName} />
                 <fieldset>
                     <legend className="mb-2 text-sm font-medium">Section type</legend>
                     <div className="grid grid-cols-2 gap-2">
@@ -92,18 +158,24 @@ export function PlaygroundPage() {
                 )}
             </SidePanel>
             <HeaderBlock title={"Lorem ipsum"} description={"Lorem ipsum dolor sit amet consectetur adipiscing elit. Quisque faucibus ex sapien vitae pellentesque sem placerat. "} />
-            <div className="px-6 py-6">
-                <button
-                    type="button"
-                    className="group flex w-full cursor-pointer flex-col items-center gap-3 rounded-2xl border-2 border-dashed border-line px-6 py-16 text-center transition-colors hover:border-accent hover:bg-accent/5 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
-                    onClick={onSidePanelOpen}
-                >
-                    <span className="rounded-full bg-line p-4 text-ink-soft transition-colors group-hover:text-accent">
-                        <PiCirclesThreePlusFill className="size-10" />
-                    </span>
-                    <span className="font-medium">Add section</span>
-                    <span className="text-sm text-ink-soft">Pick a section type to start building this page</span>
-                </button>
+            <div className="flex flex-col gap-y-4 py-4">
+                {sections.map((section) => (
+                    <SectionBlock
+                        key={section.id}
+                        isFilled
+                        title={section.title}
+                        description={section.apiName}
+                        icon={MdOutlineTitle}
+                        sidePanelOpen={() => openEdit(section)}
+                    />
+                ))}
+                <SectionBlock
+                    isFilled={false}
+                    title="Add section"
+                    description="Pick a section type to start building this page"
+                    icon={PiCirclesThreePlusFill}
+                    sidePanelOpen={openNew}
+                />
             </div>
         </div>
     )

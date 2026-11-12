@@ -1,15 +1,10 @@
 import {Link} from "@tanstack/react-router";
-import {HeaderBlock} from "@/components/blocks/HeaderBlock.tsx";
-import {Button} from "@/components/ui/Button.tsx";
-import {SearchInput} from "@/components/ui/SearchInput.tsx";
-import {ContentTable, type Column} from "@/components/blocks/ContentTable.tsx";
-import {mockColumns, mockRows, type MockRow} from "@/features/PageList/mockTable.ts";
-import {VisitsChart} from "@/components/charts/VisitsChart.tsx";
-import {mockVisits} from "@/features/PageList/mockVisits.ts";
-import {SidePanel} from "@/components/blocks/SidePanel"
 import {useState} from "react";
 
-const INPUT_CLASSES = "w-full rounded-xl border border-line bg-transparent px-4 py-2 text-sm text-ink placeholder:text-ink-soft focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+import {VisitsChart} from "@/components/charts/VisitsChart.tsx";
+import { type Column, ContentTable, HeaderBlock, LabelWithInput, LabelWithTextarea, SidePanel } from "@/components/blocks";
+import {Button, INPUT_CLASSES, SearchInput} from "@/components/ui"
+import {mockColumns, type MockRow, mockRows, mockVisits} from "@/lib/interfaces/PageList.ts";
 
 const columns: Column<MockRow>[] = mockColumns.map(column =>
     column.id === "first"
@@ -36,19 +31,10 @@ export function PageList() {
 
     return (
         <div>
-            <SidePanel title="Add Service" isOpen={isPanelOpen} onClose={onSidePanelClose}>
-                <label className="flex flex-col gap-2">
-                    <span className="text-sm font-medium">Name</span>
-                    <input placeholder="e.g. Personal blog" className={INPUT_CLASSES} />
-                </label>
-                <label className="flex flex-col gap-2">
-                    <span className="text-sm font-medium">API key</span>
-                    <input placeholder="personal-blog" className={`${INPUT_CLASSES} font-mono`} />
-                </label>
-                <label className="flex flex-col gap-2">
-                    <span className="text-sm font-medium">Description</span>
-                    <textarea rows={4} placeholder="Short page description" className={`${INPUT_CLASSES} resize-none`} />
-                </label>
+            <SidePanel title="Add Service" submitLabel="Create" isOpen={isPanelOpen} onClose={onSidePanelClose} onSubmit={onSidePanelClose}>
+                <LabelWithInput label="Name" inputPlaceholder="e.g. Personal blog" classNameInput={INPUT_CLASSES} />
+                <LabelWithInput label="API key" inputPlaceholder="personal-blog" classNameInput={`${INPUT_CLASSES} font-mono`} />
+                <LabelWithTextarea label="Description" textareaPlaceholder="Short page description" classNameTextarea={`${INPUT_CLASSES} resize-none`} rows={4} />
                 <label className="flex flex-col gap-2">
                     <span className="text-sm font-medium">Page type</span>
                     <select className={INPUT_CLASSES}>
