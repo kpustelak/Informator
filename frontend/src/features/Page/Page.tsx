@@ -11,7 +11,7 @@ export function Page(){
             <div className="flex flex-col gap-4 px-6 py-6">
                 <div className="flex gap-x-4">
                     <SearchInput wrapperClassName="flex-1" />
-                    <Button type={"a"} variant={"secondary"}> Create Section </Button>
+                    <Button type={"a"} variant={"secondary"}> Create Page </Button>
                 </div>
                 <ContentTable columns={mockColumns} rows={mockRows} getRowKey={r => r.id} />
             </div>

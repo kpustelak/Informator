@@ -1,11 +1,17 @@
 import {HeaderBlock} from "@/components/blocks/HeaderBlock.tsx";
+import {HeaderFields} from "./blockFields/HeaderFields.tsx";
+import {TextFields} from "./blockFields/TextFields.tsx";
+import {ImageFields} from "./blockFields/ImageFields.tsx";
+import {GalleryFields} from "./blockFields/GalleryFields.tsx";
+import {LinkFields} from "./blockFields/LinkFields.tsx";
+import type {GalleryData, HeaderData, ImageData, LinkData, TextData} from "./blockFields/types.ts";
+import {INPUT_CLASSES} from "./inputClasses.ts";
 import { PiCirclesThreePlusFill } from "react-icons/pi";
 import {SidePanel} from "@/components/blocks/SidePanel.tsx";
 import {useState} from "react";
 
-const INPUT_CLASSES = "w-full rounded-xl border border-line bg-transparent px-4 py-2 text-sm text-ink placeholder:text-ink-soft focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
-
 const BLOCK_TYPES = [
+    { id: "header", label: "Header" },
     { id: "text", label: "Text" },
     { id: "image", label: "Image" },
     { id: "gallery", label: "Gallery" },
@@ -14,9 +20,26 @@ const BLOCK_TYPES = [
 
 type BlockType = typeof BLOCK_TYPES[number]["id"]
 
+interface BlockDataMap {
+    header: HeaderData,
+    text: TextData,
+    image: ImageData,
+    gallery: GalleryData,
+    link: LinkData,
+}
+
+const EMPTY_BLOCK_DATA: BlockDataMap = {
+    header: { title: "", description: "" },
+    text: { content: "" },
+    image: { src: "", alt: "" },
+    gallery: { images: [] },
+    link: { label: "", url: "" },
+}
+
 export function PlaygroundPage() {
-    const [isPanelOpen, setIsPanelOpen] = useState<boolean>(false)
+    const [isPanelOpen, setIsPanelOpen] = useState(false)
     const [newBlockType, setNewBlockType] = useState<BlockType>("text")
+    const [blockData, setBlockData] = useState<BlockDataMap>(EMPTY_BLOCK_DATA)
 
     function onSidePanelOpen() { setIsPanelOpen(true) }
     function onSidePanelClose() { setIsPanelOpen(false) }
@@ -27,6 +50,10 @@ export function PlaygroundPage() {
                 <label className="flex flex-col gap-2">
                     <span className="text-sm font-medium">Section title</span>
                     <input placeholder="e.g. About me" className={INPUT_CLASSES} />
+                </label>
+                <label className="flex flex-col gap-2">
+                    <span className="text-sm font-medium">Section API Name</span>
+                    <input placeholder="e.g. about-me-header" className={INPUT_CLASSES} />
                 </label>
                 <fieldset>
                     <legend className="mb-2 text-sm font-medium">Section type</legend>
@@ -48,6 +75,21 @@ export function PlaygroundPage() {
                         ))}
                     </div>
                 </fieldset>
+                {newBlockType === "header" && (
+                    <HeaderFields value={blockData.header} onChange={(header) => setBlockData({...blockData, header})} />
+                )}
+                {newBlockType === "text" && (
+                    <TextFields value={blockData.text} onChange={(text) => setBlockData({...blockData, text})} />
+                )}
+                {newBlockType === "image" && (
+                    <ImageFields value={blockData.image} onChange={(image) => setBlockData({...blockData, image})} />
+                )}
+                {newBlockType === "gallery" && (
+                    <GalleryFields value={blockData.gallery} onChange={(gallery) => setBlockData({...blockData, gallery})} />
+                )}
+                {newBlockType === "link" && (
+                    <LinkFields value={blockData.link} onChange={(link) => setBlockData({...blockData, link})} />
+                )}
             </SidePanel>
             <HeaderBlock title={"Lorem ipsum"} description={"Lorem ipsum dolor sit amet consectetur adipiscing elit. Quisque faucibus ex sapien vitae pellentesque sem placerat. "} />
             <div className="px-6 py-6">

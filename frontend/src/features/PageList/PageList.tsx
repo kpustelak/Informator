@@ -36,7 +36,7 @@ export function PageList() {
 
     return (
         <div>
-            <SidePanel title="New page" isOpen={isPanelOpen} onClose={onSidePanelClose}>
+            <SidePanel title="Add Service" isOpen={isPanelOpen} onClose={onSidePanelClose}>
                 <label className="flex flex-col gap-2">
                     <span className="text-sm font-medium">Name</span>
                     <input placeholder="e.g. Personal blog" className={INPUT_CLASSES} />
