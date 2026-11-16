@@ -6,4 +6,5 @@ export { LabelWithTextarea } from "./LabelWithTextarea";
 export { Navigation } from "./Navigation";
 export { SectionBlock } from "./SectionBlock";
 export { SidePanel } from "./SidePanel";
+export { ThumbnailGrid } from "./ThumbnailGrid";
 export { type Column } from "./ContentTable"

@@ -13,7 +13,7 @@ export interface ImageData {
 }
 
 export interface GalleryData {
-    images: string[],
+    id: string[],
 }
 
 export interface LinkData {
@@ -49,7 +49,7 @@ export const EMPTY_BLOCK_DATA: BlockDataMap = {
     header: { title: "", description: "" },
     text: { content: "" },
     image: { src: "", alt: "" },
-    gallery: { images: [] },
+    gallery: { id: [] },
     link: { label: "", url: "" },
 }
 

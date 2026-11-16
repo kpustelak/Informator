@@ -9,8 +9,8 @@ export function GalleryFields({value, onChange}: BlockFieldsProps<GalleryData>) 
             textareaPlaceholder={"https://...\nhttps://..."}
             classNameTextarea={INPUT_CLASSES}
             rows={6}
-            value={value.images.join("\n")}
-            onChange={(text) => onChange({images: text.split("\n")})}
+            value={value.id.join("\n")}
+            onChange={(text) => onChange({id: text.split("\n")})}
         />
     )
 }

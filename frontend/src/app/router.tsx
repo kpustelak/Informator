@@ -4,7 +4,6 @@ import { AppLayout } from './AppLayout'
 import { PageList} from "@/features/PageList/PageList"
 import { Page } from "@/features/Page/Page"
 import {PageSections} from "@/features/PageSections/PageSections";
-import {PlaygroundPage} from "@/features/playground/PlaygroundPage.tsx";
 
 const rootRoute = createRootRoute({ component: AppLayout })
 
