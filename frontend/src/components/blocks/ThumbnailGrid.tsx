@@ -20,8 +20,7 @@ export function ThumbnailGrid({ images, onSelect, onRemove }: ThumbnailGridProps
                             onClick={() => onRemove(image.id)}
                             aria-label={`Remove ${image.alt}`}
                             className="absolute top-1 right-1 cursor-pointer rounded-full bg-black/60 px-2 text-white"
-                        >
-                            ✕
+                        > X
                         </button>
                     )}
                 </div>
