@@ -1,4 +1,5 @@
 using System.Text;
+using Informator.Api.ExceptionHandling;
 using Informator.Api.Hubs;
 using Informator.Application;
 using Informator.Infrastructure;
@@ -10,6 +11,8 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddApplication();
 builder.Services.AddInfrastructure(builder.Configuration);
+
+builder.Services.AddExceptionHandler<GlobalExceptionHandler>();
 
 builder.Services.AddControllers();
 builder.Services.AddProblemDetails();

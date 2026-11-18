@@ -2,6 +2,5 @@
   <ItemGroup>
     <ProjectReference Include="..\Informator.Application\Informator.Application.csproj" />
     <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" PrivateAssets="all" />
   </ItemGroup>
 </Project>
