@@ -1,4 +1,5 @@
 import { GoSearch } from "react-icons/go";
+import {INPUT_CLASSES} from "@/components/ui/inputClasses.ts";
 
 type SearchInputProps = React.ComponentProps<"input"> & {
     wrapperClassName?: string
@@ -12,7 +13,7 @@ export function SearchInput({ className = "", wrapperClassName = "", ...props }:
                 type="search"
                 aria-label="Search"
                 placeholder="Search..."
-                className={`w-full pl-10 rounded-xl border border-line bg-transparent px-4 py-2 text-sm text-ink placeholder:text-ink-soft focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent ${className}`}
+                className={`${INPUT_CLASSES} pl-10 ${className}`}
                 {...props}
             />
         </label>
