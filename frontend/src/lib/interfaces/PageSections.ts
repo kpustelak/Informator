@@ -8,12 +8,11 @@ export interface TextData {
 }
 
 export interface ImageData {
-    src: string,
-    alt: string,
+    imageId: string,
 }
 
 export interface GalleryData {
-    id: string[],
+    imageIds: string[],
 }
 
 export interface LinkData {
@@ -48,8 +47,8 @@ export  interface BlockDataMap {
 export const EMPTY_BLOCK_DATA: BlockDataMap = {
     header: { title: "", description: "" },
     text: { content: "" },
-    image: { src: "", alt: "" },
-    gallery: { id: [] },
+    image: { imageId: "" },
+    gallery: { imageIds: [] },
     link: { label: "", url: "" },
 }
 
@@ -81,7 +80,7 @@ export const MOCK_SECTIONS: Section[] = [
         title: "Avatar",
         apiName: "avatar-image",
         type: "image",
-        data: {...EMPTY_BLOCK_DATA, image: { src: "https://picsum.photos/400", alt: "Avatar" }},
+        data: {...EMPTY_BLOCK_DATA, image: { imageId: "1" }},
     },
     {
         id: 4,
